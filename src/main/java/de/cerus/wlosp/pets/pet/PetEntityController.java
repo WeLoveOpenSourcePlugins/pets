@@ -2,6 +2,7 @@ package de.cerus.wlosp.pets.pet;
 
 import de.cerus.wlosp.pets.task.PetFollowTask;
 import de.cerus.wlosp.pets.task.PetTeleportTask;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -13,9 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class PetEntityController implements Listener {
 
@@ -110,12 +109,17 @@ public class PetEntityController implements Listener {
     }
 
     public void shutdown() {
+        for (Map.Entry<UUID, PetEntityData<?>> entry : new HashSet<>(petEntityDataMap.entrySet())) {
+            Player player = Bukkit.getPlayer(entry.getValue().getPlayerUuid());
+            despawnPet(player);
+        }
+
         teleportTask.cancel();
         followTask.cancel();
     }
 
     public Map<UUID, PetEntityData<?>> getPetEntityDataMap() {
-        return petEntityDataMap;
+        return Collections.unmodifiableMap(petEntityDataMap);
     }
 
 }

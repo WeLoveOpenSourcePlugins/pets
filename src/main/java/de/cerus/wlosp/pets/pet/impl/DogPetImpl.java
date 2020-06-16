@@ -3,19 +3,20 @@ package de.cerus.wlosp.pets.pet.impl;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Wolf;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class CatPetImpl extends DefaultPetImpl<Cat> {
+public class DogPetImpl extends DefaultPetImpl<Wolf> {
 
-    public CatPetImpl(JavaPlugin plugin) {
-        super(plugin, "cat", Cat.class);
+    public DogPetImpl(JavaPlugin plugin) {
+        super(plugin, "dog", Wolf.class);
     }
 
     @Override
-    public void petSpawned(Cat entity, Player owner) {
-        entity.setCatType(Cat.Type.values()[ThreadLocalRandom.current().nextInt(0, Cat.Type.values().length)]);
+    public void petSpawned(Wolf entity, Player owner) {
+        entity.setTamed(true);
         entity.setCollarColor(DyeColor.values()[ThreadLocalRandom.current().nextInt(0, DyeColor.values().length)]);
 
         super.petSpawned(entity, owner);

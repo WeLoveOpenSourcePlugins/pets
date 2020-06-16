@@ -9,7 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ZombiePetImpl extends DefaultPetImpl<Zombie> {
 
     public ZombiePetImpl(JavaPlugin plugin) {
-        super(plugin, Zombie.class);
+        super(plugin, "zombie", Zombie.class);
     }
 
     @Override

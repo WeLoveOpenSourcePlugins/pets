@@ -9,12 +9,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class DefaultPetImpl<T extends LivingEntity> extends Pet<T> {
 
     public DefaultPetImpl(JavaPlugin plugin, Class<T> entityClass) {
-        this(plugin, entityClass, new PetFlag[]{PetFlag.PEACEFUL,
-                PetFlag.FOLLOW_OWNER, PetFlag.TELEPORT_WHEN_AWAY});
+        this(plugin, entityClass.getSimpleName().split("\\.")[0], entityClass,
+                new PetFlag[]{PetFlag.PEACEFUL, PetFlag.FOLLOW_OWNER, PetFlag.TELEPORT_WHEN_AWAY});
     }
 
-    public DefaultPetImpl(JavaPlugin plugin, Class<T> entityClass, PetFlag[] flags) {
-        super(plugin, entityClass.getSimpleName().split("\\.")[0], entityClass, flags);
+    public DefaultPetImpl(JavaPlugin plugin, String name, Class<T> entityClass) {
+        this(plugin, name, entityClass, new PetFlag[]{PetFlag.PEACEFUL, PetFlag.FOLLOW_OWNER,
+                PetFlag.TELEPORT_WHEN_AWAY});
+    }
+
+    public DefaultPetImpl(JavaPlugin plugin, String name, Class<T> entityClass, PetFlag[] flags) {
+        super(plugin, name, entityClass, flags);
     }
 
     @Override
