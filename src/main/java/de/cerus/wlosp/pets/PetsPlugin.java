@@ -1,7 +1,9 @@
 package de.cerus.wlosp.pets;
 
 import de.cerus.wlosp.pets.command.PetCommand;
+import de.cerus.wlosp.pets.file.PetFileLoader;
 import de.cerus.wlosp.pets.listener.PlayerListener;
+import de.cerus.wlosp.pets.pet.Pet;
 import de.cerus.wlosp.pets.pet.PetEntityController;
 import de.cerus.wlosp.pets.pet.PetRegistry;
 import de.cerus.wlosp.pets.pet.impl.CatPetImpl;
@@ -22,6 +24,9 @@ public class PetsPlugin extends JavaPlugin {
                 new ZombiePetImpl(this),
                 new CatPetImpl(this)
         );
+
+        PetFileLoader petFileLoader = new PetFileLoader();
+        petRegistry.registerPetImplementations(petFileLoader.loadPetFiles().toArray(new Pet[0]));
 
         getServer().getPluginManager().registerEvents(new PlayerListener(petEntityController), this);
         getCommand("pet").setExecutor(new PetCommand(petRegistry, petEntityController));

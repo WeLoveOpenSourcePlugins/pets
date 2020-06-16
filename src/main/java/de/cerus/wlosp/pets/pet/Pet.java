@@ -11,11 +11,11 @@ public abstract class Pet<T extends LivingEntity> {
     private final Class<? extends LivingEntity> entityClass;
     private PetFlag[] flags;
 
-    public Pet(JavaPlugin plugin, Class<T> entityClass, String name) {
+    public Pet(JavaPlugin plugin, Class<? extends LivingEntity> entityClass, String name) {
         this(plugin, name, entityClass, new PetFlag[0]);
     }
 
-    protected Pet(JavaPlugin plugin, String name, Class<T> entityClass, PetFlag[] flags) {
+    protected Pet(JavaPlugin plugin, String name, Class<? extends LivingEntity> entityClass, PetFlag[] flags) {
         this.plugin = plugin;
         this.name = name;
         this.entityClass = entityClass;
