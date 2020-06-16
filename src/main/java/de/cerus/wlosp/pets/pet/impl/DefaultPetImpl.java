@@ -14,7 +14,7 @@ public class DefaultPetImpl<T extends LivingEntity> extends Pet<T> {
     }
 
     public DefaultPetImpl(JavaPlugin plugin, Class<T> entityClass, PetFlag[] flags) {
-        super(plugin, entityClass, flags);
+        super(plugin, entityClass.getSimpleName().split("\\.")[0], entityClass, flags);
     }
 
     @Override

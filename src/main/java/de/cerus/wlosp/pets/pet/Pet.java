@@ -7,15 +7,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 public abstract class Pet<T extends LivingEntity> {
 
     private final JavaPlugin plugin;
+    private final String name;
     private final Class<? extends LivingEntity> entityClass;
     private PetFlag[] flags;
 
-    public Pet(JavaPlugin plugin, Class<T> entityClass) {
-        this(plugin, entityClass, new PetFlag[0]);
+    public Pet(JavaPlugin plugin, Class<T> entityClass, String name) {
+        this(plugin, name, entityClass, new PetFlag[0]);
     }
 
-    protected Pet(JavaPlugin plugin, Class<T> entityClass, PetFlag[] flags) {
+    protected Pet(JavaPlugin plugin, String name, Class<T> entityClass, PetFlag[] flags) {
         this.plugin = plugin;
+        this.name = name;
         this.entityClass = entityClass;
         this.flags = flags;
     }
@@ -26,6 +28,10 @@ public abstract class Pet<T extends LivingEntity> {
 
     public void setFlags(PetFlag[] flags) {
         this.flags = flags;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Class<? extends LivingEntity> getEntityClass() {
