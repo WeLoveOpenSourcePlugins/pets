@@ -2,12 +2,9 @@ package de.cerus.wlosp.pets.pet;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public abstract class Pet<T extends LivingEntity> implements Listener {
+public abstract class Pet<T extends LivingEntity> {
 
     private final JavaPlugin plugin;
     private final Class<? extends LivingEntity> entityClass;
@@ -21,7 +18,6 @@ public abstract class Pet<T extends LivingEntity> implements Listener {
         this.plugin = plugin;
         this.entityClass = entityClass;
         this.flags = flags;
-        this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }
 
     public abstract void petSpawned(T spawnedEntity, Player owner);
@@ -42,5 +38,13 @@ public abstract class Pet<T extends LivingEntity> implements Listener {
 
     public PetFlag[] getFlags() {
         return flags;
+    }
+
+    public int getFlagInteger() {
+        int i = 0;
+        for (PetFlag flag : flags) {
+            i = i | flag.getFlag();
+        }
+        return i;
     }
 }

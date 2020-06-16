@@ -1,0 +1,9 @@
+name: wlosp-pets
+author: Cerus
+main: de.cerus.wlosp.pets.PetsPlugin
+version: ${project.version}
+api-version: 1.15
+
+commands:
+  pet:
+    description: "Main command of Pet plugin"
